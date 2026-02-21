@@ -1,38 +1,164 @@
+<p align="center">
+  <img src="assets/topnotch-europe-mesh-ai-logo.png" alt="TopNotchEuropeMeshAI logo" width="320" />
+</p>
 
-decide how to best structure this application $$$. Should it be skill - https://platform.claude.com/docs/en/agents-and-tools/agent-skills/overview or CLI? How will the end user - hackaton graduate - use it, and what is the best way to authenticate to all of those platforms including linkedin. Do we need any MCP servers?
+<h1 align="center">TopNotchEuropeMeshAI</h1>
 
-<idea>
-Our project idea is to create app that will help hackers and students all around the world deploy and promote their projects after Hackathon. People usually don't have time. time and uh after hackathon they put off very nice projects and we want to change that.
+<p align="center">
+  <strong>From Polish hackathon projects to global traction in one workflow.</strong>
+</p>
 
-So the hackers are not the masters in marketing areas and we want to leverage the traction With customers to better market the product that was done during Hackathon.
-</idea>
+<p align="center">
+  <img alt="Built in Poland" src="https://img.shields.io/badge/Built%20in-Poland-white?style=flat-square&labelColor=d4213d&color=ffffff" />
+  <img alt="Stage" src="https://img.shields.io/badge/Stage-Hackathon%20to%20GTM-0b61a4?style=flat-square" />
+  <img alt="Channels" src="https://img.shields.io/badge/Channels-Instagram%20%7C%20LinkedIn%20%7C%20Pitch%20Deck-2d8f85?style=flat-square" />
+</p>
 
-<input>
-repo link, Hackathon website, maybe landing page link, but I think github link is enough.
-</input>
+TopNotchEuropeMeshAI is a go-to-market automation toolkit for hackers and student builders.
+It turns a repository into:
 
-<product>
-1. Understand the product, the customer - ICP, who pays for what and whay they want:
-- research great sources around that topic, You can do the quick web search to check what are the competitors and how the solution is innovative and how compared to the others
-2. Create GTM strategy:
-- create posts strategy for linkedin, x.com, facebook - A 7–14 day distribution plan (posts + schedule + communities)
-- export a content calendar + “copy-to-clipboard” + share links.
-- create pitchdeck
-- research who to email, create those emails and send them with links to socials / project + deck
-</product>
+- platform-ready social content (Instagram + LinkedIn),
+- AI-generated visual assets (images and short videos),
+- and an investor-ready pitch deck.
 
-<resources>
-Here are possible resources to use for each feature. Use context7, deepwiki mcp and all available resources to research the best from end user and development perspecitve options.
+The goal is simple: stop great hackathon projects from dying after demo day.
 
-how to create great pitchdeck? - follow:
-https://x.com/michuk/status/2022790063835238448
-https://michuk.medium.com/8-slides-that-will-land-venture-funding-for-your-pre-seed-startup-f6f7c6d5a454
+## Why This Exists
 
-integrate linkedin:
-- https://learn.microsoft.com/en-us/linkedin/consumer/integrations/self-serve/share-on-linkedin
+Most hackathon teams can build, but distribution gets postponed after the event.
+TopNotchEuropeMeshAI closes that gap by giving founders a practical post-hackathon path:
 
-slides:
-https://github.com/slidevjs/slidev
-https://gamma.app/
-https://skills.sh/anthropics/skills/pptx
-</resourcs>
+1. understand the project and audience,
+2. generate a clear narrative,
+3. distribute content across channels fast.
+
+## What You Get
+
+| Capability | What it does |
+|---|---|
+| Unified project brief | Extracts context once, stores it in `.social/project-brief.json`, reuses it everywhere |
+| Instagram publishing | Generates image/video assets and publishes via Instagram Graph API |
+| LinkedIn workflow | Crafts professional posts and supports CLI-based LinkedIn publishing |
+| Pitch deck generation | Builds an 8-slide investor deck from repo context using Slidev |
+| Repo-first flow | Starts from your README/codebase so you do not rewrite your story for each channel |
+
+## Built In Poland, For Builders Everywhere
+
+TopNotchEuropeMeshAI is rooted in the Polish builder mindset:
+
+- ship fast,
+- stay practical,
+- focus on real outcomes.
+
+We built this for teams coming out of hackathons across Poland and Europe who need momentum, not another dashboard.
+
+## Architecture (High-Level)
+
+```text
+Repo/README
+   -> /go-to-market command
+   -> context extraction + user input
+   -> .social/project-brief.json (single source of truth)
+   -> channel distribution:
+      - Instagram (media generation + publish)
+      - LinkedIn (post strategy + publish)
+      - Pitch Deck (Slidev 8-slide framework)
+```
+
+## Quick Start
+
+### 1. Clone and prepare dependencies
+
+```bash
+git clone https://github.com/barteksad/top-notch-europe-mesh-ai.git
+cd top-notch-europe-mesh-ai
+
+# Script dependencies (Gemini generation tools)
+python3 -m pip install -r social/scripts/requirements.txt
+
+# Instagram MCP server dependencies
+python3 -m venv social/server/.venv
+social/server/.venv/bin/pip install -r social/server/requirements.txt
+```
+
+### 2. Configure environment variables
+
+Copy and fill:
+
+```bash
+cp .env.example .env
+```
+
+Required variables depend on which channels you use:
+
+| Variable | Required for | Notes |
+|---|---|---|
+| `GEMINI_API_KEY` | AI image/video generation | Google Gemini API key |
+| `INSTAGRAM_ACCESS_TOKEN` | Instagram posting | Graph API access token |
+| `INSTAGRAM_USER_ID` | Instagram posting | Instagram Business account ID |
+| `GITHUB_TOKEN` | Instagram local file upload flow | Used to upload media before publish |
+| `GITHUB_REPO` | Instagram local file upload flow | Format: `owner/repo` |
+| `LINKEDIN_CLIENT_ID` | LinkedIn CLI auth | LinkedIn app client ID |
+| `LINKEDIN_CLI_REDIRECT_URI` | LinkedIn CLI auth | Redirect URI configured in app |
+
+### 3. Run the plugin workflow
+
+```bash
+claude --plugin-dir ./social
+```
+
+Then run:
+
+```text
+/go-to-market .
+```
+
+This command will:
+
+1. research your repo,
+2. build/update `.social/project-brief.json`,
+3. guide distribution to Instagram, LinkedIn, and pitch deck generation.
+
+## Core Commands
+
+- `/go-to-market` - End-to-end flow: research -> brief -> distribute
+- `/post-instagram` - Instagram-only content flow
+
+## Repository Structure
+
+```text
+.
+├── social/
+│   ├── commands/go-to-market.md
+│   ├── server/server.py
+│   ├── scripts/generate_image.py
+│   ├── scripts/generate_video.py
+│   └── skills/
+│       ├── instagram-content-strategy/
+│       ├── linkedin-cli/
+│       ├── remotion-best-practices/
+│       └── repo-to-fundraising-pitchdeck/
+├── assets/topnotch-europe-mesh-ai-logo.png
+├── slides.md
+└── README.md
+```
+
+## Team
+
+**Team name:** `TopNotchEuropeMeshAI`
+
+Core contributors:
+
+- Bartek Sadlej
+- TomekNocon
+
+## Roadmap
+
+- Add X/Twitter and Facebook distribution as first-class channels
+- Add stronger competitor and market research automation
+- Add an exportable 14-day content calendar with scheduling recommendations
+- Improve analytics feedback loop per channel
+
+## License
+
+Licensed under the Apache License 2.0. See `LICENSE`.

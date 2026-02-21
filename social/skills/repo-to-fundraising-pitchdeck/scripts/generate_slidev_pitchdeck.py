@@ -377,7 +377,9 @@ def render_deck(brief: dict[str, Any], repo_signals: list[str]) -> str:
         render_slide("Ask", ask_bullets, notes=compose_notes(ask)),
     ]
 
-    return "\n\n---\n\n".join(["\n".join(headmatter).rstrip(), *slides]).rstrip() + "\n"
+    # Each slide renderer already emits slide frontmatter (`--- ... ---`), so
+    # adding another separator between slides creates unintended blank pages.
+    return "\n\n".join(["\n".join(headmatter).rstrip(), *slides]).rstrip() + "\n"
 
 
 def main() -> int:
