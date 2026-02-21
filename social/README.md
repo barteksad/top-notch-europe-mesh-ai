@@ -32,27 +32,34 @@ The Instagram MCP server is bundled in `server/` and starts automatically.
 
 ## Usage
 
-### Instagram
+### Go To Market (recommended)
 
-Run `/post-instagram` to:
-1. Read your project README to understand context
-2. Choose: generate media with AI or provide your own
-3. Generate an image (Imagen 4) or video (Veo 3) if requested
-4. Craft a caption with hashtags
-5. Post to Instagram
+Run `/go-to-market` for the full pipeline:
+1. Analyze your repo and extract project context
+2. Ask a few questions to fill gaps
+3. Save a unified brief to `.social/project-brief.json`
+4. Choose channels: Instagram, LinkedIn, Pitch Deck (or all three)
+5. Generate content and publish to each selected channel
+
+The brief is created once and feeds all channels — no re-explaining your project for each platform.
+
+### Instagram (standalone)
+
+Run `/post-instagram` to post to Instagram only. If a project brief exists from `/go-to-market`, it uses that automatically.
 
 ### LinkedIn
 
-The `linkedin-cli` skill activates when you ask about LinkedIn posting. It provides:
-- OAuth login and token exchange
-- Publishing posts from terminal workflows
-- Post history and engagement analytics
-- Safe automation with dry-run and confirmation behavior
+The `linkedin-content-strategy` skill activates when you ask about LinkedIn posting. Reads from the project brief if available.
+
+### Pitch Deck
+
+The `repo-to-fundraising-pitchdeck` skill activates when you ask to create a pitch deck. Maps the project brief to an 8-slide investor framework.
 
 ## Components
 
 ### Commands
-- `/post-instagram` - Interactive workflow for creating and publishing Instagram posts
+- `/go-to-market` - Full pipeline: research → brief → distribute to Instagram, LinkedIn, pitch deck
+- `/post-instagram` - Standalone Instagram posting workflow
 
 ### Skills
 - `instagram-content-strategy` - Caption writing, hashtags, and visual content strategy for Instagram

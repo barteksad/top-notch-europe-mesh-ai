@@ -1,0 +1,79 @@
+{
+  "meta": {
+    "created_at": "",
+    "updated_at": "",
+    "repo_url": "",
+    "website": "",
+    "landing_page": ""
+  },
+  "project": {
+    "name": "",
+    "one_liner": "",
+    "description": "",
+    "stage": "",
+    "tech_stack": [],
+    "key_features": [],
+    "evidence": [],
+    "assumptions": []
+  },
+  "audience": {
+    "target_users": "",
+    "icp": "",
+    "pain_points": [],
+    "evidence": [],
+    "assumptions": []
+  },
+  "hackathon": {
+    "name": "",
+    "theme": "",
+    "prize": "",
+    "build_time": "",
+    "team_members": []
+  },
+  "narrative": {
+    "problem": {
+      "headline": "",
+      "bullets": [],
+      "evidence": [],
+      "assumptions": []
+    },
+    "solution": {
+      "headline": "",
+      "bullets": [],
+      "evidence": [],
+      "assumptions": []
+    },
+    "why_now": {
+      "headline": "",
+      "bullets": [],
+      "evidence": [],
+      "assumptions": []
+    },
+    "traction": {
+      "headline": "",
+      "bullets": [],
+      "evidence": [],
+      "assumptions": []
+    },
+    "market": {
+      "headline": "",
+      "bullets": [],
+      "evidence": [],
+      "assumptions": []
+    }
+  },
+  "fundraising": {
+    "raise_amount": "",
+    "runway_months": "",
+    "milestones": [],
+    "use_of_funds": []
+  },
+  "team": {
+    "headline": "",
+    "members": [],
+    "bullets": [],
+    "evidence": [],
+    "assumptions": []
+  },
+  "content_angles": []
+}

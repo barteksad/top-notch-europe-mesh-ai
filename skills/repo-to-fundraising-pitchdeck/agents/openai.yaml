@@ -1,4 +1,0 @@
-interface:
-  display_name: "Fundraising Deck Builder"
-  short_description: "Turn any repo into an investor pitch deck"
-  default_prompt: "Use $repo-to-fundraising-pitchdeck to analyze this repository and produce an 8-slide Slidev pre-seed fundraising deck backed by repo evidence."
