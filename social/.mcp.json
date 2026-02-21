@@ -1,9 +1,9 @@
 {
   "mcpServers": {
     "instagram": {
-      "command": "/Users/tomasznocon/Documents/Perelyn/Calude-code-desktop-workspace/instagram-mcp-server/.venv/bin/python",
+      "command": "${CLAUDE_PLUGIN_ROOT}/server/.venv/bin/python",
       "args": [
-        "/Users/tomasznocon/Documents/Perelyn/Calude-code-desktop-workspace/instagram-mcp-server/server.py"
+        "${CLAUDE_PLUGIN_ROOT}/server/server.py"
       ],
       "env": {
         "INSTAGRAM_ACCESS_TOKEN": "${INSTAGRAM_ACCESS_TOKEN}",

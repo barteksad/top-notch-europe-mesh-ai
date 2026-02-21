@@ -1,0 +1,156 @@
+---
+name: instagram-content-strategy
+description: This skill should be used when the user asks to "post on Instagram", "create Instagram content", "publish to Instagram", "generate an Instagram post", "share project on Instagram", "promote on Instagram", "create a reel", "make an Instagram image". Provides end-to-end Instagram content creation for hackathon projects, including AI-powered image and video generation, caption crafting with hashtags, and publishing via the Instagram Graph API.
+---
+
+# Instagram Content Strategy for Hackathon Projects
+
+Create and publish Instagram content to promote hackathon and developer projects. This skill assumes project context has already been gathered and is available as input.
+
+## Expected Input
+
+This skill receives project context that may include any combination of:
+- **Project name** and one-line description
+- **Problem it solves** and target audience
+- **Key features** and technical highlights
+- **Tech stack** used
+- **Hackathon context** (name, theme, prize won if any)
+- **Repo link** (GitHub URL)
+- **Landing page** or website URL
+- **Specific angle or topic** the user wants to highlight
+
+If any critical context is missing (no project name, no description), ask the user to fill in the gaps before proceeding. Do not attempt to read files or gather context on your own — work with what was provided.
+
+## How to Handle the Input
+
+### 1. Decide on Media Type
+
+Present the user with a choice using AskUserQuestion:
+- **Option A: Generate media with AI** — Create an image or video based on the provided project context
+- **Option B: Provide your own media** — User supplies their own image or video file
+
+If generating with AI, ask whether they want:
+- **Image (photo post)** — Static image for the feed (1:1 aspect ratio)
+- **Video (reel)** — Short video for Reels (9:16, 8 seconds max)
+
+### 2. Generate the Visual (if AI-generated)
+
+Using the provided project context, craft a generation prompt that:
+- Visually represents the project's core concept
+- Uses clean, modern tech aesthetics
+- Avoids text-heavy compositions (Instagram crops/compresses text)
+
+Available models for **images** (`${CLAUDE_PLUGIN_ROOT}/scripts/generate_image.py`):
+- `imagen` — Imagen 4 (default, reliable)
+- `imagen-ultra` — Imagen 4 Ultra (highest quality)
+- `imagen-fast` — Imagen 4 Fast
+- `nanobanana-pro` — Nano Banana Pro / Gemini 3 Pro Image (best text rendering, up to 4K)
+- `gemini-flash` — Gemini 2.5 Flash native image gen
+
+Available models for **videos** (`${CLAUDE_PLUGIN_ROOT}/scripts/generate_video.py`):
+- `veo3` — Veo 3 (default, high quality)
+- `veo3-fast` — Veo 3 Fast
+- `veo3.1` — Veo 3.1 (latest preview)
+- `veo3.1-fast` — Veo 3.1 Fast
+- `veo2` — Veo 2 (faster, lower quality)
+
+Run generation:
+```bash
+GEMINI_API_KEY="$GEMINI_API_KEY" python3 ${CLAUDE_PLUGIN_ROOT}/scripts/generate_image.py \
+  --prompt "<crafted prompt>" \
+  --output /tmp/instagram_post_image.png \
+  --model imagen \
+  --aspect-ratio 1:1
+```
+
+```bash
+GEMINI_API_KEY="$GEMINI_API_KEY" python3 ${CLAUDE_PLUGIN_ROOT}/scripts/generate_video.py \
+  --prompt "<crafted prompt>" \
+  --output /tmp/instagram_post_video.mp4 \
+  --model veo3 \
+  --aspect-ratio 9:16 \
+  --duration 8
+```
+
+### 3. Craft the Caption
+
+Using the provided project context, write an engaging Instagram caption:
+- **Hook in the first line** — Lead with the most compelling fact or question
+- **Tell the story** — What was built, why, and the impact (2-3 sentences)
+- **Call to action** — "Link in bio", "Try it out", "Star us on GitHub"
+- **Keep it concise** — 150-300 characters for best engagement
+- **Line breaks** — Use empty lines between sections for readability
+- **Hashtags** — 15-20 total, mixed tiers (see `references/hashtag-guide.md`)
+
+Present the draft caption to the user and ask if they want to edit or approve it.
+
+### 4. Post to Instagram
+
+Once approved, use the Instagram MCP server tools:
+- `post_photo` for image posts — provide the image path and caption
+- `post_reel` for video posts — provide the video path and caption
+
+Local files are automatically uploaded to GitHub by the MCP server before posting.
+
+After posting, share the result with the user including the Media ID and Instagram link.
+
+## Caption Templates
+
+### Launch Announcement
+```
+[Hook - what makes this special]
+
+Built [project name] at [hackathon] - [one-line description].
+
+[Key feature or metric]
+
+[Call to action]
+
+[Hashtags]
+```
+
+### Problem/Solution
+```
+[Problem statement as question]
+
+That's why we built [project name] - [solution].
+
+[How it works in one sentence]
+
+[Call to action]
+
+[Hashtags]
+```
+
+### Behind the Scenes
+```
+[Hours/team/hackathon context]
+
+[What was built and the challenge]
+
+[Outcome or learning]
+
+[Call to action]
+
+[Hashtags]
+```
+
+## Image Prompt Guidelines
+
+- **Product showcase**: "Clean minimal UI mockup of [app description], floating on gradient background, modern design, soft shadows"
+- **Conceptual**: "Abstract visualization of [concept], tech aesthetic, vibrant colors, clean composition"
+- **Team/hack vibe**: "Overhead shot of developer workspace with laptop showing [app], coffee, sticky notes, hackathon badge"
+
+Avoid: photorealistic people (restricted in some regions), small text, cluttered compositions.
+
+## Video Prompt Guidelines
+
+- **App demo feel**: "Smooth camera pan across a modern laptop screen showing [app concept], soft lighting, minimal desk setup"
+- **Impact visualization**: "Animated data visualization showing [metric/concept], modern motion graphics style"
+- **Tech aesthetic**: "Abstract tech particles forming into [shape/logo], dark background, neon accents"
+
+## Additional Resources
+
+- **`references/hashtag-guide.md`** — Comprehensive hashtag research for tech/hackathon content
+- **`${CLAUDE_PLUGIN_ROOT}/scripts/generate_image.py`** — Image generation (Imagen 4, Nano Banana Pro, Gemini Flash)
+- **`${CLAUDE_PLUGIN_ROOT}/scripts/generate_video.py`** — Video generation (Veo 2/3/3.1)
