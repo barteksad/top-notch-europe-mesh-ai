@@ -1,0 +1,16 @@
+{
+  "mcpServers": {
+    "instagram": {
+      "command": "/Users/tomasznocon/Documents/Perelyn/Calude-code-desktop-workspace/instagram-mcp-server/.venv/bin/python",
+      "args": [
+        "/Users/tomasznocon/Documents/Perelyn/Calude-code-desktop-workspace/instagram-mcp-server/server.py"
+      ],
+      "env": {
+        "INSTAGRAM_ACCESS_TOKEN": "${INSTAGRAM_ACCESS_TOKEN}",
+        "INSTAGRAM_USER_ID": "${INSTAGRAM_USER_ID}",
+        "GITHUB_TOKEN": "${GITHUB_TOKEN}",
+        "GITHUB_REPO": "${GITHUB_REPO}"
+      }
+    }
+  }
+}
