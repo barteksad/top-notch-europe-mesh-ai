@@ -29,7 +29,20 @@ New-Item -ItemType Directory -Force -Path "$env:USERPROFILE\.agents\skills"
 cmd /c mklink /J "$env:USERPROFILE\.agents\skills\topnotch-social" "$env:USERPROFILE\.codex\topnotch-social\skills"
 ```
 
-3. Restart Codex so it rescans skills.
+3. Configure env values in the repo clone:
+
+```bash
+cd ~/.codex/topnotch-social
+cp .env.example .env
+# fill values
+./scripts/validate_env.sh --load --profile all
+```
+
+4. Start Codex with env loaded:
+
+```bash
+./scripts/run_with_env.sh codex
+```
 
 ## Verify
 
@@ -46,7 +59,7 @@ cd ~/.codex/topnotch-social
 git pull
 ```
 
-Skills update immediately through the symlink after restart.
+Skills update through the symlink after restart.
 
 ## Uninstall
 

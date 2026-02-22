@@ -16,6 +16,26 @@ It supports:
 - Gemini API key (for AI media generation)
 - Instagram Graph API credentials (for posting)
 
+## Unified Environment Setup
+
+From repository root:
+
+```bash
+cp .env.example .env
+# fill values
+
+./scripts/validate_env.sh --load --profile all
+```
+
+Run agents so they inherit env values:
+
+```bash
+./scripts/run_with_env.sh claude
+./scripts/run_with_env.sh codex
+```
+
+Use `.env.local` for machine-specific overrides.
+
 ## Environment Variables
 
 | Variable | Required for | Description |
@@ -26,6 +46,7 @@ It supports:
 | `GITHUB_TOKEN` | Local media upload | Token used for GitHub upload flow |
 | `GITHUB_REPO` | Local media upload | Repo in `owner/repo` format |
 | `LINKEDIN_CLIENT_ID` | LinkedIn CLI auth | LinkedIn app client id |
+| `LINKEDIN_CLIENT_SECRET` | LinkedIn CLI auth | LinkedIn app client secret |
 | `LINKEDIN_CLI_REDIRECT_URI` | LinkedIn CLI auth | Redirect URI configured in LinkedIn app |
 
 ## Commands

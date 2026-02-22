@@ -1,58 +1,61 @@
 ---
 theme: default
-title: "top-notch-europe-mesh-ai | Fundraising Deck"
+title: "TopNotchEuropeMeshAI | Fundraising Deck"
 info: |
-  Revised for clean Slidev rendering and stronger investor narrative.
+  Generated with repo-to-fundraising-pitchdeck.
 mdc: true
 drawings:
   enabled: false
-exportFilename: "top-notch-europe-mesh-ai-fundraising-deck"
+exportFilename: "topnotcheuropemeshai-fundraising-deck"
+---
+
 ---
 
 ---
 layout: cover
 ---
 
-# top-notch-europe-mesh-ai
+# TopNotchEuropeMeshAI
 
-Repo-to-distribution engine for hackathon teams.
-
-- One command: research -> brief -> Instagram + LinkedIn + pitch deck
-- Built at HackEurope in Feb 2026 by a 2-person team
-- Open source: https://github.com/barteksad/top-notch-europe-mesh-ai
+- A cross-agent go-to-market copilot that turns software repos into launch-ready social campaigns and investor materials from a single prompt.
+- Stage: pre-seed
+- Repository: https://github.com/barteksad/top-notch-europe-mesh-ai
+- Target raise: EUR 500,000
 
 <!--
 Evidence:
-- Workflow and channels from social/README.md
-- Repository URL and hackathon framing from current deck + README context
+- README.md defines the product as a cross-platform social workflow plugin and skills pack for Claude Code and Codex.
+- .claude-plugin/plugin.json ships plugin version 1.2.0 with repository and marketplace metadata.
+- social/commands/go-to-market.md documents an end-to-end flow from repo research to Instagram, LinkedIn, and pitch deck output.
+
+Assumptions to confirm:
+- Raise amount and runway are draft placeholders pending founder confirmation.
 -->
 
 ---
-layout: two-cols
+
+---
+layout: default
 ---
 
 # Team
 
-## Builders who ship
-
-- TomekNocon: 9 commits
-- Bartek Sadlej: 4 commits
-- 13 commits across 2026-02-21 to 2026-02-22
-
-::right::
-
-## Why this team can win
-
-- Combined skills in automation workflows, media generation, and distribution tooling
-- Shipped Instagram flow first, then LinkedIn and pitch deck paths
-- Built both command UX (`/go-to-market`) and generation scripts
+- **Builders who already shipped a working cross-agent distribution stack.**
+- Core contributors visible in git history: TomekNocon and Bartek Sadlej.
+- Team shipped both source workflows and distributable bundles for Claude marketplace and Codex skills.
+- Execution spans product workflow design, AI media generation scripts, and publishing infrastructure.
 
 <!--
 Evidence:
-- git shortlog -sn HEAD
-- git log dates and commit messages
-- social/commands/go-to-market.md and social/scripts/
+- git shortlog -sn HEAD shows two active contributors.
+- scripts/build_universal_packages.sh builds and versions both Claude and Codex distribution bundles.
+- dist/ contains packaged artifacts including topnotch-social-claude-marketplace-v1.2.0.tar.gz and topnotch-social-codex-skills-v1.2.0.tar.gz.
+
+Assumptions to confirm:
+- Founder backgrounds, prior exits, and role split are not yet documented in the repository.
 -->
+
+---
 
 ---
 layout: default
@@ -60,51 +63,48 @@ layout: default
 
 # Problem
 
-<v-clicks>
-
-- Hackathon projects lose momentum after demo day because promotion is manual.
-- Builders rewrite the same project story for each channel from scratch.
-- Generating visuals, captions, and investor decks takes more time than shipping code.
-- Result: strong technical projects stay invisible after launch.
-
-</v-clicks>
+- **European builders can build fast, but distribution and fundraising execution blocks launch momentum.**
+- Many AI prototypes and side projects stop after a demo because go-to-market work is fragmented and time-consuming.
+- Builders are forced into marketer, salesperson, and fundraiser roles without repeatable systems.
+- Customer research, launch content, and investor narrative creation become separate overhead projects.
 
 <!--
 Evidence:
-- Problem statement in README.md and social/README.md
+- Founder narrative provided in the pitch text explicitly states this pain pattern and stalled project outcomes.
+- The repository focuses on solving this exact gap through commands that automate social distribution and deck generation.
 
 Assumptions to confirm:
-- Exact post-hackathon drop-off rate by segment
+- No quantified funnel-drop or conversion benchmarks are currently captured in-repo.
 -->
 
 ---
-layout: two-cols
+
+---
+layout: default
 ---
 
 # Solution
 
-## Unified workflow
-
-1. `/go-to-market` analyzes repository context once.
-2. A shared brief becomes a reusable source of truth.
-3. Channel skills generate channel-native assets and copy.
-
-::right::
-
-## What ships today
-
-- Instagram media generation + publishing path
-- LinkedIn strategy + CLI posting flow
-- Slidev investor deck generation from the same brief
-- Reusable Python generators for Imagen and Veo models
+- **One prompt activates a multi-skill agent workflow that turns a repo into a launch system.**
+- The `/go-to-market` command builds a reusable project brief and routes output to Instagram, LinkedIn, and investor deck generation.
+- Gemini-powered scripts generate campaign media assets (image and video) from project context.
+- Publishing is connected to execution channels: LinkedIn CLI for posting and Instagram MCP server for photo/reel publishing.
+- Workflow state is designed to persist in project files (`.social/project-brief.json` and SOCIAL.md) for reruns and progress tracking.
 
 <!--
 Evidence:
-- social/README.md usage and component docs
-- social/scripts/generate_image.py
-- social/scripts/generate_video.py
-- social/commands/go-to-market.md
+- social/commands/go-to-market.md defines the multi-channel pipeline and deck generation steps.
+- social/scripts/generate_image.py and social/scripts/generate_video.py implement Gemini API media generation.
+- social/skills/linkedin-cli/scripts/linkedin_cli.py implements OAuth, post create/get/list, and analytics commands.
+- social/server/server.py exposes `post_photo` and `post_reel` MCP tools for Instagram Graph API publishing.
+- skills/ contains six top-level skill directories.
+
+Assumptions to confirm:
+- OpenAI Codex and Cursor distribution readiness is inferred from Codex packaging and workflow docs; direct Cursor install docs need explicit confirmation.
+- End-to-end autopublishing depends on valid third-party credentials and account permissions.
 -->
+
+---
 
 ---
 layout: default
@@ -112,18 +112,22 @@ layout: default
 
 # Why Now
 
-| Shift | Why it matters |
-| --- | --- |
-| Generative media APIs are usable in production | Small teams can ship campaign-ready assets fast |
-| Agent skills + CLI workflows are maturing | Multi-step GTM execution can run from one command |
-| Hackathon output keeps growing | More builders need post-demo distribution support |
-
-- Timing thesis: distribution tooling is becoming a core part of developer tooling.
+- **AI coding output is rising faster than founder go-to-market capacity, creating a distribution automation gap.**
+- Builder workflows can now produce prototypes quickly, but launch orchestration is still mostly manual.
+- LLM APIs and MCP-compatible tooling make it feasible to automate media generation, posting, and investor narrative output in one system.
+- Cross-agent packaging (Claude plugin plus Codex skills bundles) enables immediate distribution where builders already work.
 
 <!--
+Evidence:
+- Repository ships both plugin and skills distribution channels with mirrored workflow content.
+- go-to-market and channel-specific commands codify an end-to-end launch path from repo context.
+
 Assumptions to confirm:
-- External market trend sizes and growth rates
+- Market urgency and timing drivers are based on observed builder behavior; external trend citations are not yet attached.
+- Cursor channel demand is assumed from adjacent Codex/Cursor usage patterns.
 -->
+
+---
 
 ---
 layout: default
@@ -131,47 +135,55 @@ layout: default
 
 # Traction
 
-- Active build velocity: 13 commits from 2 contributors, latest commit on 2026-02-22.
-- Real generated artifacts already stored in `uploads/` (`.png` and `.mp4`).
-- End-to-end architecture is implemented across research, generation, and channel skills.
-- Single distribution command is documented and runnable (`social/commands/go-to-market.md`).
+- **Early execution proof: functioning product surface, packaged releases, and rapid iteration.**
+- 15 commits in current history with latest commit on 2026-02-22 focused on distribution and packaging.
+- Versioned release artifacts are already generated for both marketplace and skills-only installs.
+- Workflow spans repo analysis, media generation, social posting, and pitch deck generation from a single command surface.
+- Six reusable skills are bundled and mirrored for distribution consistency.
 
 <!--
 Evidence:
-- git rev-list --count HEAD
-- git shortlog -sn HEAD
-- git log -1 --format with date
-- uploads/* media files
-- social/commands/go-to-market.md
+- git rev-list --count HEAD returns 15; latest commit subject: feat: distribution and package.
+- dist/ includes v1.2.0 tarballs for Claude marketplace and Codex skills.
+- README.md and social/README.md document supported workflow outcomes and required channels.
+- SOCIAL.md exists with ledger conventions.
+- skills/ top-level folders confirm six packaged skills.
+- Repository footprint: ~210 files scanned.
+- Most common file extensions: .md (147), .json (17), .py (11), .yaml (10), .tsx (9).
+- Build/runtime manifests detected: requirements.txt.
+- Git commits in history: 15.
+- Latest commit date: 2026-02-22.
+
+Assumptions to confirm:
+- No production usage, retention, or revenue metrics are stored in the repository yet.
+- No customer interview or pilot conversion data is currently documented.
 -->
 
 ---
-layout: two-cols
+
+---
+layout: default
 ---
 
 # Market
 
-## Beachhead ICP
-
-- Hackathon teams in the first 7-14 days after demo day
-- Student founders and indie hackers launching MVPs
-- Technical builders with low marketing bandwidth
-
-::right::
-
-## Expansion path
-
-- Accelerator cohorts needing weekly launch/distribution packs
-- Devtool teams converting release notes into multi-channel GTM content
-- Agency and community operators supporting many small teams
+- **Wedge: builders shipping AI projects who need a fast path from prototype to distribution.**
+- Initial users are hackathon teams, side-project builders, and early founders who can build but lack GTM capacity.
+- Product starts with social launch and fundraising narrative, then expands into repeat campaign operations via project files.
+- Cross-agent compatibility enables adoption across existing builder tools instead of forcing a new platform.
+- Expansion path: from launch assistant into ongoing growth operating system for technical founders.
 
 <!--
 Evidence:
-- ICP direction inferred from README/social intent
+- README and social docs repeatedly target hackathon projects and developer workflows.
+- Pipeline artifacts (`.social/project-brief.json`, SOCIAL.md, generated media/deck assets) are structured for repeat operation.
 
 Assumptions to confirm:
-- Bottom-up market sizing and willingness to pay by segment
+- TAM/SAM/SOM quantification is not yet included and should be added with external market research.
+- Conversion from hackathon users to paying startup customers remains to be validated.
 -->
+
+---
 
 ---
 layout: default
@@ -179,19 +191,19 @@ layout: default
 
 # Ask
 
-- Proposed raise (draft): EUR 300k for 12 months runway.
-- Objective: convert a hackathon prototype into a repeatable GTM engine for technical founders.
-
-| Next milestones (6-12 months) | Target output |
-| --- | --- |
-| Productize brief + generation pipeline | Reliable multi-channel content packs |
-| Add analytics feedback loop | Narrative-to-engagement tracking by channel |
-| Run design-partner pilots | 20-30 teams using the workflow repeatedly |
-
-- Draft use of funds: product engineering 55%, model/API spend 25%, GTM experiments 20%.
+- Raise amount: EUR 500,000
+- Runway target: 18 months
+- **Raise a focused pre-seed round to validate repeatable demand and scale distribution.**
+- Target raise: EUR 500,000 for 18 months runway.
+- Primary goal: prove repeatable prototype-to-distribution outcomes with design partners.
+- Next-round trigger: clear retention and conversion signal from pilot to paid usage.
 
 <!--
+Evidence:
+- Current repository indicates pre-seed stage product execution but no monetization metrics.
+- Existing workflow architecture supports milestone-based validation once users are onboarded.
+
 Assumptions to confirm:
-- Raise amount and runway target
-- Pilot volume target and milestone timing
+- Final raise amount, runway target, and milestone thresholds require founder approval.
+- Pilot volume and paid conversion targets are planning assumptions, not observed metrics.
 -->

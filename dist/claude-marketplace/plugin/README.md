@@ -27,9 +27,12 @@ The social workflow turns a repo into:
 │   ├── marketplace.json
 │   └── plugin.json
 ├── .mcp.json
+├── .env.example
 ├── codex/
 │   └── INSTALL.md
 ├── scripts/
+│   ├── run_with_env.sh
+│   ├── validate_env.sh
 │   ├── sync_social_skills.sh
 │   ├── validate_universal_packages.sh
 │   └── build_universal_packages.sh
@@ -87,6 +90,46 @@ python3 -m venv social/server/.venv
 social/server/.venv/bin/pip install -r social/server/requirements.txt
 ```
 
+## Unified Environment Setup
+
+This repo follows a single env model for both Claude and Codex:
+
+1. Copy env template:
+
+```bash
+cp .env.example .env
+```
+
+2. Fill `.env` with real values.
+
+3. Optionally add machine-specific overrides in `.env.local`.
+
+4. Validate env values for your target workflow:
+
+```bash
+./scripts/validate_env.sh --load --profile all
+```
+
+Use narrower profiles when needed:
+
+```bash
+./scripts/validate_env.sh --load --profile instagram
+./scripts/validate_env.sh --load --profile linkedin
+./scripts/validate_env.sh --load --profile media
+```
+
+5. Start agents through the env launcher so they inherit values:
+
+```bash
+./scripts/run_with_env.sh claude
+./scripts/run_with_env.sh codex
+```
+
+Important:
+- `.env` and `.env.local` are gitignored.
+- Env changes require restarting the agent process.
+- MCP server env mapping is explicit in `.mcp.json` and `social/.mcp.json`.
+
 ## Environment Variables
 
 | Variable | Required for |
@@ -97,6 +140,7 @@ social/server/.venv/bin/pip install -r social/server/requirements.txt
 | `GITHUB_TOKEN` | Upload local media before Instagram publish |
 | `GITHUB_REPO` | Upload local media before Instagram publish |
 | `LINKEDIN_CLIENT_ID` | LinkedIn CLI auth |
+| `LINKEDIN_CLIENT_SECRET` | LinkedIn CLI auth/token exchange |
 | `LINKEDIN_CLI_REDIRECT_URI` | LinkedIn CLI auth |
 
 ## Maintainer Workflow
@@ -110,7 +154,7 @@ Treat `social/` as source of truth.
 ./scripts/sync_social_skills.sh --validate
 ```
 
-3. Validate cross-platform packaging:
+3. Validate packaging and env template consistency:
 
 ```bash
 ./scripts/validate_universal_packages.sh
