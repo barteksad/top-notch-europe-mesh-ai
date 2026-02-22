@@ -1,0 +1,105 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.com/linkedin-cli/post_receipt.schema.json",
+  "title": "LinkedIn CLI Post Receipt",
+  "type": "object",
+  "required": [
+    "status",
+    "operation",
+    "profile",
+    "dry_run",
+    "timestamp",
+    "request"
+  ],
+  "properties": {
+    "status": {
+      "type": "string",
+      "enum": ["ok", "error"]
+    },
+    "operation": {
+      "type": "string",
+      "const": "post.create"
+    },
+    "profile": {
+      "type": "string",
+      "minLength": 1
+    },
+    "dry_run": {
+      "type": "boolean"
+    },
+    "timestamp": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "request": {
+      "type": "object"
+    },
+    "receipt": {
+      "type": "object",
+      "required": [
+        "author_urn",
+        "visibility",
+        "lifecycle_state",
+        "http_status",
+        "created_at"
+      ],
+      "properties": {
+        "post_urn": {
+          "type": ["string", "null"]
+        },
+        "post_url": {
+          "type": ["string", "null"]
+        },
+        "author_urn": {
+          "type": "string"
+        },
+        "visibility": {
+          "type": "string"
+        },
+        "lifecycle_state": {
+          "type": "string"
+        },
+        "request_id": {
+          "type": ["string", "null"]
+        },
+        "restli_id": {
+          "type": ["string", "null"]
+        },
+        "http_status": {
+          "type": "integer"
+        },
+        "api_response": {
+          "type": ["object", "array", "string", "number", "boolean", "null"]
+        },
+        "response_headers": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "created_at": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "additionalProperties": true
+    },
+    "ledger": {
+      "type": "object",
+      "required": ["event_id", "path"],
+      "properties": {
+        "event_id": {
+          "type": "string"
+        },
+        "path": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": true
+    },
+    "job": {
+      "type": "object"
+    }
+  },
+  "additionalProperties": true
+}

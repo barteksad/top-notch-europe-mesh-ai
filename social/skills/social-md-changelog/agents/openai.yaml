@@ -1,0 +1,4 @@
+interface:
+  display_name: "SOCIAL.md Changelog"
+  short_description: "Track repo social actions in SOCIAL.md"
+  default_prompt: "Use $social-md-changelog to log this LinkedIn post and related commit in SOCIAL.md."

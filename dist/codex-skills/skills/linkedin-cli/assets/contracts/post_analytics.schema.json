@@ -1,0 +1,64 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.com/linkedin-cli/post_analytics.schema.json",
+  "title": "LinkedIn CLI Post Analytics",
+  "type": "object",
+  "required": [
+    "status",
+    "operation",
+    "profile",
+    "post_urn",
+    "collected_at",
+    "engagement",
+    "raw"
+  ],
+  "properties": {
+    "status": {
+      "type": "string",
+      "enum": ["ok", "error"]
+    },
+    "operation": {
+      "type": "string",
+      "const": "analytics.get"
+    },
+    "profile": {
+      "type": "string",
+      "minLength": 1
+    },
+    "post_urn": {
+      "type": "string",
+      "minLength": 1
+    },
+    "collected_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "engagement": {
+      "type": "object",
+      "required": ["likes", "comments", "shares", "reactions"],
+      "properties": {
+        "likes": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "comments": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "shares": {
+          "type": ["integer", "null"],
+          "minimum": 0
+        },
+        "reactions": {
+          "type": ["integer", "null"],
+          "minimum": 0
+        }
+      },
+      "additionalProperties": true
+    },
+    "raw": {
+      "type": ["object", "array", "string", "number", "boolean", "null"]
+    }
+  },
+  "additionalProperties": true
+}

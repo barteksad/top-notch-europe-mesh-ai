@@ -1,0 +1,19 @@
+{
+  "name": "topnotch-social-marketplace",
+  "owner": {
+    "name": "HackEurope"
+  },
+  "metadata": {
+    "description": "Cross-agent go-to-market workflows for hackathon projects.",
+    "version": "1.2.0"
+  },
+  "plugins": [
+    {
+      "name": "social",
+      "source": "./plugin",
+      "description": "Repo-to-market workflow with Instagram, LinkedIn, and fundraising pitch deck generation.",
+      "version": "1.2.0",
+      "strict": true
+    }
+  ]
+}

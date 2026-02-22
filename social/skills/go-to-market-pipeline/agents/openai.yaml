@@ -1,0 +1,4 @@
+interface:
+  display_name: "Go To Market Pipeline"
+  short_description: "Repo-to-social distribution workflow"
+  default_prompt: "Use $go-to-market-pipeline to research this repo, build .social/project-brief.json, and generate Instagram, LinkedIn, and pitch deck drafts."

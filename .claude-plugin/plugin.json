@@ -1,0 +1,24 @@
+{
+  "name": "social",
+  "description": "Social media and fundraising workflow plugin for hackathon projects.",
+  "version": "1.2.0",
+  "author": {
+    "name": "HackEurope",
+    "url": "https://github.com/barteksad/top-notch-europe-mesh-ai"
+  },
+  "homepage": "https://github.com/barteksad/top-notch-europe-mesh-ai",
+  "repository": "https://github.com/barteksad/top-notch-europe-mesh-ai",
+  "license": "Apache-2.0",
+  "keywords": [
+    "social-media",
+    "hackathon",
+    "instagram",
+    "linkedin",
+    "pitch-deck",
+    "codex",
+    "claude"
+  ],
+  "commands": "./social/commands",
+  "skills": "./skills",
+  "mcpServers": "./.mcp.json"
+}
